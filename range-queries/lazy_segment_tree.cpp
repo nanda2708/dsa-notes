@@ -1,10 +1,9 @@
-#include <bits/stdc++.h>
+﻿#include <bits/stdc++.h>
 using namespace std;
 
 // Lazy Segment Tree (Range Add + Range Sum) | Time: O(log N) | Space: O(4N)
 struct LazySeg {
-    int n;
-    vector<long long> tr, lz;
+    int n; vector<long long> tr, lz;
     LazySeg(const vector<long long>& a) : n((int)a.size()), tr(4 * n), lz(4 * n) { build(a, 1, 0, n - 1); }
     void build(const vector<long long>& a, int u, int l, int r) {
         if (l == r) { tr[u] = a[l]; return; }
@@ -35,7 +34,6 @@ struct LazySeg {
         return sum(2 * u, l, m, ql, qr) + sum(2 * u + 1, m + 1, r, ql, qr);
     }
 };
-
 int main() {
     ios::sync_with_stdio(false); cin.tie(nullptr);
     LazySeg st({1, 3, 5, 7, 9});
