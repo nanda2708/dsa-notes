@@ -1,12 +1,14 @@
-#include <bits/stdc++.h>
+﻿#include <bits/stdc++.h>
 using namespace std;
 
 // Tarjan Strongly Connected Components | Time: O(V + E) | Space: O(V)
 int main() {
-    ios::sync_with_stdio(false); cin.tie(nullptr);
-    int n = 5, timer = 0, scc_count = 0;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n = 5, timer = 0, sccs = 0;
     vector<vector<int>> adj(n);
-    adj[0].push_back(1); adj[1].push_back(2); adj[2].push_back(0); adj[2].push_back(3); adj[3].push_back(4);
+    adj[0].push_back(1); adj[1].push_back(2); adj[2].push_back(0);
+    adj[2].push_back(3); adj[3].push_back(4);
     vector<int> tin(n, 0), low(n, 0);
     vector<bool> on_st(n, false);
     stack<int> st;
@@ -18,11 +20,14 @@ int main() {
             else if (on_st[v]) low[u] = min(low[u], tin[v]);
         }
         if (low[u] == tin[u]) {
-            ++scc_count;
-            while (true) { int x = st.top(); st.pop(); on_st[x] = false; if (x == u) break; }
+            ++sccs;
+            while (true) {
+                int x = st.top(); st.pop(); on_st[x] = false;
+                if (x == u) break;
+            }
         }
     };
     for (int i = 0; i < n; ++i) if (!tin[i]) dfs(dfs, i);
-    cout << "Total SCCs: " << scc_count << "\n";
+    cout << "SCC count: " << sccs << "\n";
     return 0;
 }
